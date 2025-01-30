@@ -1,0 +1,64 @@
+# Ignore environment variables and secrets
+.env
+.env.local
+.env.production
+.env.*  # Avoid any env files
+
+# Ignore database and migrations
+*.sqlite3
+db.sqlite3
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore logs
+*.log
+logs/
+*.out
+
+# Ignore virtual environments
+venv/
+environment/
+.env/
+venv*/ 
+env*/
+
+# Ignore IDE/editor files
+.vscode/
+.idea/
+*.swp
+
+# Ignore static and media files
+staticfiles/
+media/
+
+# Ignore Django-related files
+*.pid
+*.log
+*.pyc
+*.pyo
+*.DS_Store
+
+# Ignore compiled dependencies
+*.egg-info/
+*.egg
+dist/
+build/
+
+# Ignore Docker and CI/CD files
+docker-compose.override.yml
+
+# Ignore coverage and test reports
+htmlcov/
+.coverage
+coverage.xml
+nosetests.xml
+test-results/
+junit.xml
+
+# Ignore node_modules (if using frontend)
+node_modules/
+
+# Ignore compiled translations
+*.mo

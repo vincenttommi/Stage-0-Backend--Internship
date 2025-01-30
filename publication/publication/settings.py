@@ -1,4 +1,26 @@
 from pathlib import Path
+from  decouple import config
+import os
+import dj_database_url
+from dotenv import load_dotenv
+
+# Explicitly load environment variables
+load_dotenv()
+
+# Debugging Step: Print the DATABASE_URL value
+DATABASE_URL = config("DATABASE_URL", default="")
+print(f"Loaded DATABASE_URL: {DATABASE_URL}")  # Debugging Output
+
+# Raise an error if DATABASE_URL is empty
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL is not set in the .env file!")
+
+DATABASES = {
+    "default": dj_database_url.parse(DATABASE_URL)
+}
+
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -8,7 +30,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-2ia_1$5hc%&m#vpeejp0(j5u$wokvwvok726$hm^jx4muo8(+p'
+
+SECRET_KEY = config('SECRET_KEY')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -64,15 +88,7 @@ WSGI_APPLICATION = 'publication.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
+# https://docs.djangoproject.com/en/5.1/ref/settings/#database
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -113,7 +129,9 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-CORS_ALLOWED_ORIGINS = ["*"]  # Allow all origins for testing
+
+
+CORS_ALLOWED_ORIGINS = config("CORS_ALLOWED_ORIGINS", default="").split(",")
 
 
 
