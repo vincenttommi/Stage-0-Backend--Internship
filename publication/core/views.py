@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 class PublicationAPI(APIView):
-    def get(self, request):  # Include 'self' as the first argument
+    def get(self, request):  
         return Response({
             "email": "vincenttommikorir@gmail.com",
             "current_datetime": now().isoformat(), 
