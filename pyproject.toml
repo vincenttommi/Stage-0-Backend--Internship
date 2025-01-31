@@ -4,11 +4,9 @@ version = "0.1.0"
 description = ""
 authors = ["vincenttommi <vincenttommi@gmail.com>"]
 readme = "README.md"
-requires-python = ">=3.12"
 
 [tool.poetry.dependencies]
-# List your dependencies here, for example:
-# requests = "^2.26.0"
+python = ">=3.12"  # This ensures your project uses Python 3.12 or newer
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
