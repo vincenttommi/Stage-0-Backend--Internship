@@ -1,47 +1,28 @@
 from pathlib import Path
-from  decouple import config
-import os
+from decouple import config
 import dj_database_url
-from dotenv import load_dotenv
+import os 
 
-# Explicitly load environment variables
-load_dotenv()
+# Base directory
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Debugging Step: Print the DATABASE_URL value
-DATABASE_URL = config("DATABASE_URL", default="")
-print(f"Loaded DATABASE_URL: {DATABASE_URL}")  # Debugging Output
+# SECURITY WARNING: Keep the secret key used in production secret!
+SECRET_KEY = config("SECRET_KEY")
 
-# Raise an error if DATABASE_URL is empty
-if not DATABASE_URL:
-    raise ValueError("DATABASE_URL is not set in the .env file!")
+# SECURITY WARNING: Don't run with debug turned on in production!
+DEBUG = config("DEBUG", default=False, cast=bool)
+
+# Allowed hosts
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="localhost,127.0.0.1").split(",")
+
+# Database Configuration
+DATABASE_URL = config("DATABASE_URL", default="postgresql://internship_9bso_user:jQilBGHeLPON7cPrqqlckGrYykmTcu2B@dpg-cudr6plumphs73cs6jh0-a.oregon-postgres.render.com/internship_9bso")
 
 DATABASES = {
     "default": dj_database_url.parse(DATABASE_URL)
 }
 
-
-
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-
-SECRET_KEY = config('SECRET_KEY')
-
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = []
-
-
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,7 +33,6 @@ INSTALLED_APPS = [
     'core',
     'rest_framework',
     "corsheaders",
-    
 ]
 
 MIDDLEWARE = [
@@ -63,7 +43,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "corsheaders.middleware.CorsMiddleware", 
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = 'publication.urls'
@@ -86,53 +66,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'publication.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#database
-
 # Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-
 # Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
 STATIC_URL = 'static/'
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-CORS_ALLOWED_ORIGINS = config("CORS_ALLOWED_ORIGINS", default="").split(",")
-
-
-
-
+# CORS settings
+CORS_ALLOW_ALL_ORIGINS = True
