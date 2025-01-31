@@ -3,7 +3,7 @@ name = "publication"
 version = "0.1.0"
 description = ""
 authors = ["vincenttommi <vincenttommi@gmail.com>"]
-readme = "README.md"
+
 
 [tool.poetry.dependencies]
 python = ">=3.12"  # This ensures your project uses Python 3.12 or newer
